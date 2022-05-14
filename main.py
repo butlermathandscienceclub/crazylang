@@ -35,8 +35,12 @@ def ex(p,i,a,l,derr):
 			if t == "/":eloop=1
 			if t == "\"": isCom = 1
 			#if t == "\"": isCom = 0
-			if t == ":":print(ascii_sub.ascii[a[i]]) 
+			if t == ":":
+				print(ascii_sub.ascii[a[i]]) 
+				
 			if t == "[": isbrk = 1
+			if t == ";": 
+				print(ascii_sub.ascii[a[i]],end='') 
 			if t == "`":
 				crsh = ''
 				for x in range(len(a)):

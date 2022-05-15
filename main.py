@@ -20,7 +20,6 @@ def ex(p,i,a,l,derr):
 		if isCom == 0:
 			if eloop == 1:
 				for i in range(0,int(t)):
-					print(exec_)
 					ex(exec_,i,[0 for i in range(by)],l,derr)
 				eloop = 0	
 			

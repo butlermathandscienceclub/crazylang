@@ -40,6 +40,7 @@ def ex(p,i,a,l,derr):
 				print(ascii_sub.ascii[a[i]]) 
 				
 			if t == "[": isbrk = 1
+			if t == "^":print()
 			if t == ";": 
 				print(ascii_sub.ascii[a[i]],end='') 
 			if t == "`":

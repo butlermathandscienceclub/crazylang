@@ -1,11 +1,14 @@
 import ascii_sub 
 import time
 import examples
+import random
+
 with open("program.crz","r")as f:
 	p = f.read()
 def err(msg,prfx="crash"):
 	with open(f"{prfx}{time.time()}.txt","a")as f:
 		f.write(msg)
+	print(msg)	
 def ex(p,i,a,l,derr):
 	eloop = 0
 	isCom = 0
@@ -46,23 +49,22 @@ def ex(p,i,a,l,derr):
 			if t == "`":
 				crsh = ''
 				for x in range(len(a)):
-					crsh += f"{x}::{a[x]}\n"
-					
+					crsh += f"{x}::{a[x]};"
+				err(f"CRASHDUMP:\n {crsh}\n PROGRAM:{p}","dump")
+
+			if t=="&"	:
+				crsh = ''
+				for x in range(len(a)):
+					crsh += f"{x}::{hex(a[x])};"
 				err(f"CRASHDUMP:\n {crsh}\n PROGRAM:{p}","dump")
 			if t == "~": 
 				for it3 in range(len(a)):
 					a[it3] = 0
 			if t == "#": i=0
+			if t=="^":
+				a[i]=random.randrange(0,255)
 			if t == "%":a[i] = ar[i]
 			
-			if t not in ["+",'-',"<",",",".","/",">","?","1","2","3","4","5","6","7","8","9","0","\"",":","[","]","`","~","#","%"] and derr==1:
-				print(f"ERROR unknown symbol:{t}")
-				crsh = ''
-				for x in range(len(a)):
-					crsh += f"{x}::{a[x]}\n"
-					
-				err(f"ERROR unknown symbol:{t}\n CRASHDUMP:\n {crsh}\n PROGRAM:{p}")
-				break
 		else:
 			if t=="\"":isCom=0		
 exec_ = ""

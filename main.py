@@ -2,19 +2,20 @@ import ascii_sub
 import time
 import examples
 import random
-import error_message.error as erp
 with open("program.crz","r")as f:
 	p = f.read()
 def err(msg,prfx="crash",error=True):
 	with open(f"{prfx}{time.time()}.txt","a")as f:
 		f.write(msg)
-	if error: erp.error(msg)
+	if error: print(msg)
 	else: print(msg)	
 def ex(p,i,a,l,derr):
 	eloop = 0
 	isCom = 0
 	isbrk = 0
 	isp=0
+	is_e =0
+	is_en =0
 	global exec_
 	global ar
 	for t in p:
@@ -24,6 +25,14 @@ def ex(p,i,a,l,derr):
 			elif a[i] == int(t):
 				ex(exec_c,i,a,l,derr)
 		if isCom == 0:
+			if is_en ==1:
+				a[i]+=int(t)
+				is_en=0
+
+			if is_e==1:
+				a[i]+= (10*int(t))
+				is_en =1
+				is_e=0
 			if isp==1:
 				print(t)
 			if eloop == 1:
@@ -45,6 +54,7 @@ def ex(p,i,a,l,derr):
 			if t == "(": isp = 1
 			if t == "/":eloop=1
 			if t == "\"": isCom = 1
+			if t == "=": is_e = 1
 			if t == ":":
 				print(ascii_sub.ascii[a[i]]) 
 				
